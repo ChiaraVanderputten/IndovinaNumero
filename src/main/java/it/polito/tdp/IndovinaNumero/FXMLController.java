@@ -39,6 +39,9 @@ public class FXMLController {
     @FXML 
     private HBox layoutTentativo; 
 
+    @FXML
+    private Button btnModalitaAssistita;
+    
     @FXML 
     private Button btnNuovaPartita; 
 
@@ -70,6 +73,11 @@ public class FXMLController {
     private ProgressBar progresso;
 
     @FXML
+    void doAssistita(ActionEvent event) {
+
+    }
+    
+    @FXML
     void doDifBassa(ActionEvent event) {
     	
     	NMAX = 100; 
@@ -98,8 +106,6 @@ public class FXMLController {
 
     	btnNuovaPartita.setDisable(false);
     }
-
-
     
     @FXML
     void doNuovaPartita(ActionEvent event) {
@@ -109,7 +115,6 @@ public class FXMLController {
     	this.inGioco = true;
     	
       
-    	
     	//gestione dell'interfaccia
     	this.txtTentativi.setText(Integer.toString(TMAX));
     	this.layoutTentativo.setDisable(false);
@@ -124,6 +129,7 @@ public class FXMLController {
     	//lettura input dell'utente
     	String ts = txtTentativoUtente.getText();
     	int tentativo;
+    	int c=NMAX;
     	
     	try {
     		tentativo = Integer.parseInt(ts);
@@ -132,6 +138,16 @@ public class FXMLController {
     		return;  //esci perchÃ¨ deve cambiare il numero
 
     	}
+    	
+    		if(numeriScelti.contains(Integer.parseInt(txtTentativoUtente.getText()))) {
+    		    txtRisultato.clear();
+    			txtRisultato.appendText("Numero gia' provato,cambialo!!");
+    			return;
+    		}else 
+    			numeriScelti.add(Integer.parseInt(txtTentativoUtente.getText()));
+    		
+    		
+    		
 
     	this.txtTentativoUtente.setText(""); //serve per pulire dove ho inserito il mio tentativo
     	
@@ -157,27 +173,27 @@ public class FXMLController {
     		return;  //esco ho finito i tentativi
     	}
     	
-    /*	if(numeriScelti.size()==0)
-    		numeriScelti.add(Integer.parseInt(txtTentativoUtente.getText()));
-    	else {
-
-    		if(numeriScelti.contains(Integer.parseInt(txtTentativoUtente.getText()))) {
-    		    txtRisultato.clear();
-    			txtRisultato.appendText("Numero giÃ  provato,cambialo!!");
-    			return;
-    		}else 
-    			numeriScelti.add(Integer.parseInt(txtTentativoUtente.getText()));
-    		
-    	      }
-*/
-    	
-    	
     	//Non ho vinto -> devo informare l'utente circa la bontà del suo tentativo
     	if(tentativo < this.segreto) {
     		txtRisultato.setText("TENTATIVO TROPPO BASSO");
     	} else {
     		txtRisultato.setText("TENTATIVO TROPPO ALTO");
     	}
+    	
+    	/*if(numeriScelti.size()==1 && txtRisultato.getText().equals("TENTATIVO TROPPO ALTO"))
+    		txtRisultato.setText("Il valore segreto è compreso tra: 0 e " +numeriScelti.toString());
+    	else if(numeriScelti.size()==1 && txtRisultato.getText().equals("TENTATIVO TROPPO BASSO"))
+    		txtRisultato.setText("Il valore segreto è compreso tra: "+NMAX+" e " +numeriScelti.toString());
+    	else {
+    		System.out.println("bho");
+    	}
+//    	for(Integer i : numeriScelti)
+//    			if(Math.abs(segreto-i)<c)
+//    				c=i;
+//    		
+//    		txtTentativi.setText("Il valore segreto è compreso tra: ");
+ 
+       */
     	
     }
 
@@ -194,6 +210,6 @@ public class FXMLController {
         assert txtRisultato != null : "fx:id=\"txtRisultato\" was not injected: check your FXML file 'Scene.fxml'.";
         assert progresso != null : "fx:id=\"progrsso\" was not injected: check your FXML file 'Scene.fxml'.";
         assert layoutTentativo != null : "fx:id=\"layoutTentativo\" was not injected: check your FXML file 'Scene.fxml'.";
-
+        assert btnModalitaAssistita != null : "fx:id=\"btnModalitaAssistita\" was not injected: check your FXML file 'Scene.fxml'.";
     }
 }

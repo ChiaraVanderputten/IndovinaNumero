@@ -19,12 +19,20 @@
    <center>
       <VBox BorderPane.alignment="CENTER">
          <children>
+            <Button fx:id="btnModalitaAssistita" mnemonicParsing="false" onAction="#doAssistita" text="Modalità Assistita">
+               <VBox.margin>
+                  <Insets bottom="20.0" left="10.0" />
+               </VBox.margin>
+            </Button>
             <MenuButton fx:id="btnDifficolta" mnemonicParsing="false" onAction="#doScegliDifficolta" text="Difficoltà">
               <items>
                 <MenuItem fx:id="mnBassa" mnemonicParsing="false" onAction="#doDifBassa" text="Bassa" />
                 <MenuItem fx:id="mnMedia" mnemonicParsing="false" onAction="#doDiffMedia" text="Media" />
                   <MenuItem fx:id="mnAlta" mnemonicParsing="false" onAction="#doDiffAlta" text="Alta" />
               </items>
+               <VBox.margin>
+                  <Insets left="10.0" />
+               </VBox.margin>
             </MenuButton>
             <HBox>
                <children>
@@ -56,16 +64,12 @@
                      </HBox.margin>
                   </TextField>
                   <Button fx:id="btnProva" mnemonicParsing="false" onAction="#doTentativo" text="Prova" />
-                  <ProgressBar fx:id="progresso" progress="0.0">
-                     <HBox.margin>
-                        <Insets left="30.0" right="20.0" />
-                     </HBox.margin>
-                  </ProgressBar>
                </children>
                <VBox.margin>
                   <Insets bottom="10.0" />
                </VBox.margin>
             </HBox>
+            <ProgressBar fx:id="progresso" progress="0.0" />
          </children>
       </VBox>
    </center>
