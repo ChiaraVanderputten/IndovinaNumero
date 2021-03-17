@@ -1,8 +1,6 @@
 package it.polito.tdp.IndovinaNumero;
 
 import javafx.application.Application;
-import static javafx.application.Application.launch;
-
 import it.polito.tdp.IndovinaNumero.model.Model;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

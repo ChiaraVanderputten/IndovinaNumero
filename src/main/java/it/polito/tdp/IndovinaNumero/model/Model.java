@@ -90,8 +90,9 @@ public class Model {
 		this.tentativiFatti++;
 		this.numeriScelti.add(tentativo);
 		
-		if(this.tentativiFatti==TMAX)
+		if(this.tentativiFatti==(TMAX-1))
 			this.inGioco=false;
+		
 		if(tentativo == this.segreto) {
 			this.inGioco=false;
 			return 0;
@@ -107,10 +108,10 @@ public class Model {
 		if(tentativo < 1 || tentativo > NMAX) 
         return false;
         
-        if(this.numeriScelti.contains(tentativo)) {
+        if(numeriScelti.contains(tentativo)) 
         	return false;
-		}else
+		
 			return true;
-		}
+	}
 
 }

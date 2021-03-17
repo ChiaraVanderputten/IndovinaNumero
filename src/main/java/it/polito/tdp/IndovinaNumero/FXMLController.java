@@ -37,9 +37,9 @@ public class FXMLController {
     @FXML 
     private HBox layoutTentativo; 
 
-    @FXML
-    private Button btnModalitaAssistita;
-    
+//    @FXML
+//    private Button btnModalitaAssistita;
+//    
     @FXML 
     private Button btnNuovaPartita; 
 
@@ -58,22 +58,22 @@ public class FXMLController {
     @FXML
     private MenuButton btnDifficolta;
 
-    @FXML
-    private MenuItem mnBassa;
+//    @FXML
+//    private MenuItem mnBassa;
+//
+//    @FXML
+//    private MenuItem mnMedia;
+//
+//    @FXML
+//    private MenuItem mnAlta;
+//    
+//    @FXML
+//    private ProgressBar progresso;
 
-    @FXML
-    private MenuItem mnMedia;
-
-    @FXML
-    private MenuItem mnAlta;
-    
-    @FXML
-    private ProgressBar progresso;
-
-    @FXML
-    void doAssistita(ActionEvent event) {
-
-    }
+//    @FXML
+//    void doAssistita(ActionEvent event) {
+//
+//    }
     
 //    @FXML
 //    void doDifBassa(ActionEvent event) {
@@ -99,11 +99,11 @@ public class FXMLController {
 //    	btnNuovaPartita.setDisable(false);
 //    }
     
-    @FXML
-    void doScegliDifficolta(ActionEvent event) {
-
-    	btnNuovaPartita.setDisable(false);
-    }
+//    @FXML
+//    void doScegliDifficolta(ActionEvent event) {
+//
+//    	btnNuovaPartita.setDisable(false);
+//    }
     
     @FXML
     void doNuovaPartita(ActionEvent event) {
@@ -112,10 +112,10 @@ public class FXMLController {
     	this.model.nuovaPartita();
     	  
     	//gestione dell'interfaccia rimane qua
-    	
+    	this.txtRisultato.clear();
     	this.txtTentativi.setText(Integer.toString(this.model.getTMAX())); //errore perchè è nel modello allora devo chiedere al modello
-    	this.layoutTentativo.setDisable(false);
-    	btnDifficolta.setDisable(true); //quando comincia la partita è disabilita la scelta di difficoltà
+      	this.layoutTentativo.setDisable(false);
+//    	btnDifficolta.setDisable(true); //quando comincia la partita è disabilita la scelta di difficoltà
 
 //        numeriScelti.clear();
 //        progresso.setProgress(0.0);
@@ -125,12 +125,12 @@ public class FXMLController {
     void doTentativo(ActionEvent event) {
     	
     	//lettura input dell'utente
-    	String tentativo = txtTentativoUtente.getText();
+    	String ts = txtTentativoUtente.getText();
     	//    	int c=this.model.getNMAX();
 
-    	int ten;
-    	try {                                 //possiamo lasciarlo qui è relativo all'interfaccia
-    		ten = Integer.parseInt(tentativo);
+    	int tentativo;
+    	try {                             //possiamo lasciarlo qui è relativo all'interfaccia
+    		tentativo = Integer.parseInt(ts);
     	}catch(NumberFormatException e) {
     		txtRisultato.setText("Devi inserire un numero!");
     		return;  //esci perchÃ¨ deve cambiare il numero
@@ -150,7 +150,7 @@ public class FXMLController {
     	this.txtTentativoUtente.setText(""); //serve per pulire dove ho inserito il mio tentativo
     	
     	// tentativiFatti()++; //incrementa la variabile che conta i tentativi che sto facendo
-    	this.txtTentativi.setText(Integer.toString(this.model.getNMAX()-this.model.getTentativiFatti())); //stampa i tentativi che mi rimangono
+
     	
 //    	pr+=(double)(1/(double)TMAX);
 //    	progresso.setProgress(pr);
@@ -158,9 +158,10 @@ public class FXMLController {
     	int result;
     	
     	try {
-    	result=this.model.tentativo(Integer.parseInt(tentativo));
+    	result=this.model.tentativo(tentativo);
     	}catch(IllegalStateException se) {
     		txtRisultato.setText(se.getMessage());
+    		txtTentativi.setText("0");
     		this.layoutTentativo.setDisable(true);
     		return;
     	}catch(InvalidParameterException pe) {
@@ -168,7 +169,9 @@ public class FXMLController {
     		return;
     	}
     	
-    	if(result==0) {
+    	   	this.txtTentativi.setText(Integer.toString(this.model.getNMAX()-this.model.getTentativiFatti())); //stampa i tentativi che mi rimangono
+    	
+    	   	if(result==0) {
     		//HO INDOVINATO!
     		txtRisultato.setText("HAI VINTO CON " + this.model.getTentativiFatti() + "TENTATIVI");
     		this.layoutTentativo.setDisable(true);
@@ -200,18 +203,18 @@ public class FXMLController {
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
-    	assert btnDifficolta != null : "fx:id=\"btnDifficolta\" was not injected: check your FXML file 'Scene.fxml'.";
-        assert mnBassa != null : "fx:id=\"mnBassa\" was not injected: check your FXML file 'Scene.fxml'.";
-        assert mnMedia != null : "fx:id=\"mnMedia\" was not injected: check your FXML file 'Scene.fxml'.";
-        assert mnAlta != null : "fx:id=\"mnAlta\" was not injected: check your FXML file 'Scene.fxml'.";
+//    	assert btnDifficolta != null : "fx:id=\"btnDifficolta\" was not injected: check your FXML file 'Scene.fxml'.";
+//        assert mnBassa != null : "fx:id=\"mnBassa\" was not injected: check your FXML file 'Scene.fxml'.";
+//        assert mnMedia != null : "fx:id=\"mnMedia\" was not injected: check your FXML file 'Scene.fxml'.";
+//        assert mnAlta != null : "fx:id=\"mnAlta\" was not injected: check your FXML file 'Scene.fxml'.";
         assert btnNuovaPartita != null : "fx:id=\"btnNuovaPartita\" was not injected: check your FXML file 'Scene.fxml'.";
         assert txtTentativi != null : "fx:id=\"txtTentativi\" was not injected: check your FXML file 'Scene.fxml'.";
         assert txtTentativoUtente != null : "fx:id=\"txtTentativoUtente\" was not injected: check your FXML file 'Scene.fxml'.";
         assert btnProva != null : "fx:id=\"btnProva\" was not injected: check your FXML file 'Scene.fxml'.";
         assert txtRisultato != null : "fx:id=\"txtRisultato\" was not injected: check your FXML file 'Scene.fxml'.";
-        assert progresso != null : "fx:id=\"progrsso\" was not injected: check your FXML file 'Scene.fxml'.";
+//        assert progresso != null : "fx:id=\"progrsso\" was not injected: check your FXML file 'Scene.fxml'.";
         assert layoutTentativo != null : "fx:id=\"layoutTentativo\" was not injected: check your FXML file 'Scene.fxml'.";
-        assert btnModalitaAssistita != null : "fx:id=\"btnModalitaAssistita\" was not injected: check your FXML file 'Scene.fxml'.";
+//        assert btnModalitaAssistita != null : "fx:id=\"btnModalitaAssistita\" was not injected: check your FXML file 'Scene.fxml'.";
     }
     
     public void setModel (Model model) {
